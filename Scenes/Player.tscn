@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=2]
+[ext_resource path="res://barHorizontal_green_mid 200.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/BoatSchooner.tscn" type="PackedScene" id=4]
+
+[node name="Player" type="Spatial"]
+script = ExtResource( 1 )
+boat_tween = NodePath("BoatTween")
+
+[node name="Boat" parent="." groups=["PlayerBoat"] instance=ExtResource( 4 )]
+
+[node name="HealthBar3D" type="Sprite3D" parent="Boat"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.04641, 0 )
+visible = false
+billboard = 1
+alpha_cut = 1
+texture = ExtResource( 3 )
+
+[node name="Viewport" type="Viewport" parent="Boat/HealthBar3D"]
+size = Vector2( 200, 26 )
+transparent_bg = true
+usage = 0
+render_target_v_flip = true
+
+[node name="HealthBar" type="TextureProgress" parent="Boat/HealthBar3D/Viewport"]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 100.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 3 )
+tint_under = Color( 0.156863, 0.192157, 0.164706, 1 )
+
+[node name="CamPivot" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="h" type="Spatial" parent="CamPivot"]
+
+[node name="v" type="Spatial" parent="CamPivot/h"]
+
+[node name="Camera" type="Camera" parent="CamPivot/h/v"]
+transform = Transform( -1, 5.45461e-08, -6.83189e-08, 0, 0.781477, 0.623934, 8.74228e-08, 0.623934, -0.781477, 0.00500011, 10.5888, -7.43709 )
+far = 605.1
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="HealthBar" type="TextureProgress" parent="HUD"]
+margin_left = 38.0
+margin_top = 43.0
+margin_right = 238.0
+margin_bottom = 69.0
+rect_scale = Vector2( 3, 1 )
+value = 100.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 3 )
+tint_under = Color( 0.737255, 0.309804, 0.309804, 1 )
+
+[node name="GoldLabel" type="Label" parent="HUD"]
+margin_left = 42.0
+margin_top = 94.0
+margin_right = 104.0
+margin_bottom = 108.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Gold: 100"
+
+[node name="BoatTween" type="Tween" parent="."]
+
+[connection signal="damaged" from="Boat" to="." method="_on_Boat_Update"]

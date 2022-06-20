@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/CannonMissile.gd" type="Script" id=1]
+
+[sub_resource type="SphereShape" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=2]
+
+[sub_resource type="NoiseTexture" id=3]
+width = 2048
+height = 2048
+as_normalmap = true
+bump_strength = 3.9
+noise = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0, 0, 0, 1 )
+metallic = 0.41
+roughness = 0.28
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = SubResource( 3 )
+
+[sub_resource type="SphereMesh" id=5]
+material = SubResource( 4 )
+
+[node name="CannonMissile" type="RigidBody"]
+collision_layer = 2
+collision_mask = 13
+contacts_reported = 2
+contact_monitor = true
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.258485, 0, 0, 0, 0.258485, 0, 0, 0, 0.258485, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="CannonMesh" type="MeshInstance" parent="."]
+transform = Transform( 0.241927, 0, 0, 0, 0.241927, 0, 0, 0, 0.241927, 0, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[connection signal="body_entered" from="." to="." method="missile_hit"]
+[connection signal="body_exited" from="." to="." method="_on_CannonMissile_body_exited"]

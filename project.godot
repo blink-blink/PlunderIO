@@ -1,0 +1,262 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "BTDecorator",
+"class": "BTAlways",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_always.gd"
+}, {
+"base": "BTNode",
+"class": "BTComposite",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/bt_composite.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTConditional",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_conditional.gd"
+}, {
+"base": "BTNode",
+"class": "BTDecorator",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/bt_decorator.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTGuard",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_guard.gd"
+}, {
+"base": "BTNode",
+"class": "BTLeaf",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/bt_leaf.gd"
+}, {
+"base": "Node",
+"class": "BTNode",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/bt_node.gd"
+}, {
+"base": "BTComposite",
+"class": "BTParallel",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_parallel.gd"
+}, {
+"base": "BTSelector",
+"class": "BTRandomSelector",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_random_selector.gd"
+}, {
+"base": "BTSequence",
+"class": "BTRandomSequence",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_random_sequence.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTRepeat",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_repeat.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTRepeatUntil",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_repeat_until.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTRevert",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_revert.gd"
+}, {
+"base": "BTComposite",
+"class": "BTSelector",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_selector.gd"
+}, {
+"base": "BTComposite",
+"class": "BTSequence",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_sequence.gd"
+}, {
+"base": "BTLeaf",
+"class": "BTWait",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/leaves/bt_wait.gd"
+}, {
+"base": "Node",
+"class": "BehaviorTree",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/behavior_tree.gd"
+}, {
+"base": "Node",
+"class": "Blackboard",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/blackboard.gd"
+}, {
+"base": "RigidBody",
+"class": "Boat",
+"language": "GDScript",
+"path": "res://Scripts/Boat.gd"
+}, {
+"base": "HBoxContainer",
+"class": "ContributorClass",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/ContributorClass.gd"
+}, {
+"base": "RigidBody",
+"class": "Debris",
+"language": "GDScript",
+"path": "res://Scripts/Debris.gd"
+}, {
+"base": "PanelContainer",
+"class": "GistItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/GistItem.gd"
+}, {
+"base": "HBoxContainer",
+"class": "InvitationItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/InvitationItem.gd"
+}, {
+"base": "Spatial",
+"class": "Mob",
+"language": "GDScript",
+"path": "res://Scripts/Mob.gd"
+}, {
+"base": "PanelContainer",
+"class": "RepositoryItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/RepositoryItem.gd"
+} ]
+_global_script_class_icons={
+"BTAlways": "res://addons/behavior_tree/icons/btalways.svg",
+"BTComposite": "res://addons/behavior_tree/icons/btcomposite.svg",
+"BTConditional": "res://addons/behavior_tree/icons/btconditional.png",
+"BTDecorator": "res://addons/behavior_tree/icons/btdecorator.svg",
+"BTGuard": "res://addons/behavior_tree/icons/btguard.svg",
+"BTLeaf": "res://addons/behavior_tree/icons/btleaf.svg",
+"BTNode": "res://addons/behavior_tree/icons/btnode.svg",
+"BTParallel": "res://addons/behavior_tree/icons/btparallel.svg",
+"BTRandomSelector": "res://addons/behavior_tree/icons/btrndselector.svg",
+"BTRandomSequence": "res://addons/behavior_tree/icons/btrndsequence.svg",
+"BTRepeat": "res://addons/behavior_tree/icons/btrepeat.svg",
+"BTRepeatUntil": "res://addons/behavior_tree/icons/btrepeatuntil.svg",
+"BTRevert": "res://addons/behavior_tree/icons/btrevert.svg",
+"BTSelector": "res://addons/behavior_tree/icons/btselector.svg",
+"BTSequence": "res://addons/behavior_tree/icons/btsequence.svg",
+"BTWait": "res://addons/behavior_tree/icons/btwait.svg",
+"BehaviorTree": "res://addons/behavior_tree/icons/bt.svg",
+"Blackboard": "res://addons/behavior_tree/icons/blackboard.svg",
+"Boat": "",
+"ContributorClass": "",
+"Debris": "",
+"GistItem": "",
+"InvitationItem": "",
+"Mob": "",
+"RepositoryItem": ""
+}
+
+[application]
+
+config/name="GodotShipGame"
+run/main_scene="res://Scenes/TitleScreen.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+SceneLoader="*res://Scripts/SceneLoader.gd"
+Network="*res://Scripts/Network.gd"
+Global="*res://Scripts/Global.gd"
+GameData="*res://Scripts/GameData.gd"
+PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
+IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
+UserData="*res://addons/github-integration/scripts/user_data.gd"
+RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/behavior_tree/plugin.cfg", "res://addons/github-integration/plugin.cfg", "res://addons/line_3d/plugin.cfg" )
+
+[global]
+
+shader=false
+
+[input]
+
+move_forward={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_back={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+cannon_fire={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+cannon_aim={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+scroll_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+scroll_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+3d_physics/layer_1="Boat"
+3d_physics/layer_2="Missile"
+3d_physics/layer_3="Debris"
+3d_physics/layer_4="Island"
+3d_physics/layer_9="PickUpRadiusBonuses"
+3d_physics/layer_10="DetectionAreaMob"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/filters/msaa=2
+environment/default_environment="res://default_env.tres"

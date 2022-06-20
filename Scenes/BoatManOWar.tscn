@@ -1,0 +1,204 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Meshes/Man O' War.glb" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Cannon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/BoatDummy.gd" type="Script" id=3]
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( -0.0613, 0.0292683, -2.39401, 0.529955, 1.579, -2.77419, -0.5394, 1.57467, -2.75881, 0.508376, 0.447711, 1.7367, -0.466633, 0.471114, 2.13399, -0.528647, 1.2347, 1.72683, 0.516107, 1.2347, 1.72683, 0.0907018, -0.0122993, 2.01669, 0.507478, 0.448254, -1.41914, 0.556361, 1.61724, -1.82392, 0.245885, 0.492227, -2.87135, -0.529806, 0.766547, -2.70953, -0.568799, 1.61724, -1.82392, 0.0905916, -0.0122993, -2.52164, 0.556251, 0.802472, 2.21022, 0.36208, 1.26792, 1.86164, -0.180786, 0.996276, 2.83155, 0.509725, 0.73167, -2.67027, 0.0907018, 0.181823, 2.52089, -0.529921, 0.840914, 2.28775, -0.0613, 0.0292683, 1.91279, -0.53304, 0.584541, -2.1088, 0.207007, 0.996116, 2.79251, -0.142018, 1.26792, 1.86164, -0.484852, 0.448077, 1.73489, 0.518969, 0.585366, -2.10232, -0.432685, 0.654238, 2.4461, 0.439726, 0.879994, 2.55937, 0.458861, 0.504947, 2.23174, -0.521838, 0.482454, -1.56649, 0.556361, 1.30652, -1.47477, -0.0628823, 0.726637, 2.80138, 0.12947, 0.996116, 2.87003, -0.452274, 0.879994, 2.52089, -0.0613, 0.0662028, 2.09591, 0.391454, 0.688779, 2.53661, -0.50834, 0.616655, 2.23009, 0.0907018, 0.0266209, 2.20966, 0.458583, 0.653798, 2.41652, 0.0507233, 0.726408, 2.80989, 0.482484, 0.476723, 2.06162, -0.297201, 0.957515, 2.71442, -0.0643713, 0.996276, 2.87003, 0.401068, 0.918595, 2.59841, -0.289589, 0.76457, 2.64288, -0.491153, 0.840914, 2.4428, 0.478495, 0.879994, 2.4428, -0.413506, 0.918754, 2.55937, 0.52, 0.584897, 2.06649 )
+
+[sub_resource type="SphereMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.2, 1, 0, 1 )
+
+[node name="BoatManOWar" type="RigidBody"]
+collision_mask = 15
+mass = 2000.0
+contacts_reported = 2
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource( 3 )
+HIT_POINTS = 2000
+MOVEMENT_SPEED = 4000.0
+TURN_SPEED = 2000.0
+
+[node name="Man O\' War" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.371, 0, 0, 0, 0.371, 0, 0, 0, 0.371, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 3.451, 0, 0, 0, 3.451, 0, 0, 0, 3.451, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="Floaters" type="Spatial" parent="."]
+transform = Transform( 0.371, 0, 0, 0, 0.371, 0, 0, 0, 0.371, 0, 0, 0 )
+visible = false
+
+[node name="FloaterPoint1" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 3.10823, 23.3689 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint2" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.282924, 18.6308 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint3" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.00132394, 9.19606 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint4" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.00132394, 0.00188541 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint5" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.00132394, -8.36086 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint6" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.00132394, -14.617 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint7" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.00132394, -23.4266 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint8" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.34459, 3.11024, 21.9451 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint9" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.26813, 3.11024, 17.1343 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint10" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.26813, 3.11024, 17.1343 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint11" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.26813, 3.11024, 9.18781 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint12" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.26813, 3.11024, -0.286812 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint13" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.26813, 3.11024, -8.53184 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint14" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 2.517, 3.11, -18.839 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint15" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.016597, 4.41034, -23.2112 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint16" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.345, 3.11, 21.945 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint17" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.268, 3.11, 17.134 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint18" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.268, 3.11, 17.134 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint19" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.268, 3.11, 9.188 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint20" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.268, 3.11, -0.287 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint21" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.268, 3.11, -8.532 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="FloaterPoint22" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.51735, 3.11, -18.8388 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="Cannons" type="Spatial" parent="."]
+
+[node name="Cannon" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 2.719, -0.318 )
+
+[node name="Cannon2" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 2.719, 0.877 )
+
+[node name="Cannon3" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 2.719, 2.016 )
+
+[node name="Cannon4" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 2.719, 3.193 )
+
+[node name="Cannon5" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 2.719, 4.347 )
+
+[node name="Cannon6" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 2.719, 5.447 )
+
+[node name="Cannon7" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 1.942, 4.874 )
+
+[node name="Cannon8" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 1.942, 3.734 )
+
+[node name="Cannon9" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 1.942, 2.616 )
+
+[node name="Cannon10" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.72475, 1.91051, 1.41 )
+
+[node name="Cannon11" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 1.89845, 0.282 )
+
+[node name="Cannon12" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 1.942, -0.847 )
+
+[node name="Cannon13" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 1.942, -1.994 )
+
+[node name="Cannon14" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 1.942, -3.189 )
+
+[node name="Cannon15" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.764, 1.942, -4.374 )
+
+[node name="Cannon16" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.817, 2.77, -3.715 )
+
+[node name="Cannon17" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.817, 2.715, -2.635 )
+
+[node name="Cannon18" parent="Cannons" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 0.999999, 0, 0.999999, 0, -1, 0, -4.37113e-08, 1.817, 2.715, -1.421 )
+
+[connection signal="body_entered" from="." to="." method="boat_hit"]
