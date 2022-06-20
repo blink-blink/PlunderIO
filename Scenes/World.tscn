@@ -1,0 +1,291 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scripts/World.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/ChatBox.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/DebrisCrates.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/Fonts/NugieRomantic_109.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Scripts/Water.gd" type="Script" id=5]
+[ext_resource path="res://0001.jpg" type="Texture" id=6]
+[ext_resource path="res://0258.jpg" type="Texture" id=7]
+[ext_resource path="res://LP_WaterShader.gdshader" type="Shader" id=8]
+[ext_resource path="res://Scenes/Island.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/Fonts/NugieRomantic_64.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Scenes/GameMenu.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/DebrisBonuses.tscn" type="PackedScene" id=12]
+[ext_resource path="res://WaterNoise2.tres" type="Texture" id=13]
+[ext_resource path="res://WaterNoise1.tres" type="Texture" id=14]
+
+[sub_resource type="ProceduralSky" id=20]
+sky_top_color = Color( 0.384314, 0.764706, 0.968627, 1 )
+sky_horizon_color = Color( 0.968627, 0.968627, 0.968627, 1 )
+ground_bottom_color = Color( 0.588802, 0.508499, 0.605469, 1 )
+ground_horizon_color = Color( 0.980392, 0.980392, 0.980392, 1 )
+
+[sub_resource type="Environment" id=19]
+background_mode = 2
+background_sky = SubResource( 20 )
+ambient_light_color = Color( 0.796078, 0.709804, 0.792157, 1 )
+ambient_light_sky_contribution = 0.88
+fog_enabled = true
+fog_color = Color( 0.72549, 1, 0.984314, 1 )
+fog_depth_end = 675.2
+fog_depth_curve = 1.51572
+tonemap_mode = 2
+ssao_enabled = true
+dof_blur_far_distance = 245.07
+dof_blur_far_transition = 15.76
+dof_blur_near_enabled = true
+
+[sub_resource type="ShaderMaterial" id=21]
+shader = ExtResource( 8 )
+shader_param/time = 0.0
+shader_param/deep_color = Color( 0.313726, 0.619608, 0.643137, 1 )
+shader_param/shallow_color = Color( 0, 1, 0.658824, 1 )
+shader_param/ocean_gradient = Color( 0, 0.172549, 0.439216, 1 )
+shader_param/beer_factor = 0.7
+shader_param/color_beer_factor = 0.7
+shader_param/amount = 0.8
+shader_param/waveA = Plane( 0.122, 0.164, 0.15, 10 )
+shader_param/waveB = Plane( 0.313, 0.621, 0.15, 10 )
+shader_param/waveC = Plane( 1.274, 0.891, 0.2, 25 )
+shader_param/waveD = Plane( 1, 1, 0.05, 100 )
+shader_param/speed = 0.189
+shader_param/disp_noise1 = ExtResource( 14 )
+shader_param/disp_noise2 = ExtResource( 13 )
+shader_param/normalmap = ExtResource( 7 )
+shader_param/normalmap2 = ExtResource( 6 )
+
+[sub_resource type="PlaneMesh" id=3]
+material = SubResource( 21 )
+size = Vector2( 500.5, 500.5 )
+subdivide_width = 250
+subdivide_depth = 250
+
+[sub_resource type="CylinderMesh" id=22]
+
+[sub_resource type="Curve3D" id=23]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -11.1035, 0, -64.2181, 0, 0, 0, 0, 0, 0, 13.9879, 0, 56.1424, 0, 0, 0, 0, 0, 0, -129.506, 0, 117.462, 0, 0, 0, 0, 0, 0, -133.013, 0, -54.0969, 0, 0, 0, 0, 0, 0, -11.1035, 0, -64.2181, 0, 0, 0, 0, 0, 0, -153.19, 0, -204.897, 0, 0, 0, 0, 0, 0, 106.741, 0, -237.438, 0, 0, 0, 0, 0, 0, 216.909, 0, -86.105, 0, 0, 0, 0, 0, 0, 211.931, 0, 125.296, 0, 0, 0, 0, 0, 0, -11.1035, 0, -64.2181 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="World" type="Node"]
+script = ExtResource( 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 19 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( 0.949184, 0.0383639, 0.312375, -0.267262, -0.425876, 0.864408, 0.166195, -0.903968, -0.393981, 41.6061, 38.4068, -12.1379 )
+light_color = Color( 1, 0.847059, 0.721569, 1 )
+light_bake_mode = 2
+shadow_enabled = true
+
+[node name="Water" type="Spatial" parent="."]
+script = ExtResource( 5 )
+
+[node name="WaterMesh" type="MeshInstance" parent="Water"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WaterMesh2" type="MeshInstance" parent="Water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -500, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WaterMesh3" type="MeshInstance" parent="Water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -500 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WaterMesh4" type="MeshInstance" parent="Water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -500, 0, -500 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WaterMesh5" type="MeshInstance" parent="Water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, -500 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WaterMesh6" type="MeshInstance" parent="Water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WaterMesh7" type="MeshInstance" parent="Water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 500 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WaterMesh8" type="MeshInstance" parent="Water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 500 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="WaterMesh9" type="MeshInstance" parent="Water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -500, 0, 500 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Mobs" type="Spatial" parent="."]
+
+[node name="Islands" type="Spatial" parent="."]
+transform = Transform( 0.301576, 0, 0, 0, 0.301576, 0, 0, 0, 0.301576, 2.89963, 0, -3.15602 )
+
+[node name="Island" parent="Islands" instance=ExtResource( 9 )]
+transform = Transform( 3.31591, 0, 0, 0, 3.31591, 0, 0, 0, 3.31591, 66.2097, -0.509235, -3.69875 )
+
+[node name="Island2" parent="Islands" instance=ExtResource( 9 )]
+transform = Transform( -3.67883, 0, 3.21763, 0, 4.88742, 0, -3.21763, 0, -3.67883, -189.067, -0.509235, -34.624 )
+
+[node name="Island3" parent="Islands" instance=ExtResource( 9 )]
+transform = Transform( -3.53445, 0, -3.37559, 0, 4.88742, 0, 3.37559, 0, -3.53445, 44.9978, -0.509235, -453.553 )
+
+[node name="SpawnLocations" type="Spatial" parent="."]
+
+[node name="PlayerSpawn" type="Spatial" parent="SpawnLocations"]
+visible = false
+
+[node name="sp1" type="MeshInstance" parent="SpawnLocations/PlayerSpawn"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2256, 0, -5.65497 )
+mesh = SubResource( 22 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="sp2" type="MeshInstance" parent="SpawnLocations/PlayerSpawn"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.5045, 0, 60.1695 )
+mesh = SubResource( 22 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="sp3" type="MeshInstance" parent="SpawnLocations/PlayerSpawn"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -144.55, 0, 60.0594 )
+mesh = SubResource( 22 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="sp4" type="MeshInstance" parent="SpawnLocations/PlayerSpawn"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -182.297, 1.52588e-05, -131.016 )
+mesh = SubResource( 22 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="sp5" type="MeshInstance" parent="SpawnLocations/PlayerSpawn"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 152.484, 0, -151.74 )
+mesh = SubResource( 22 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="Mob" type="Path" parent="SpawnLocations"]
+curve = SubResource( 23 )
+
+[node name="MobSpawnLocation" type="PathFollow" parent="SpawnLocations/Mob"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1035, 0, -64.2181 )
+
+[node name="DebrisBonuses" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84247, 0, 5.24942 )
+
+[node name="DebrisBonuses2" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03834, 0, 8.1509 )
+
+[node name="DebrisBonuses3" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.46625, 2.07766, 7.80228 )
+
+[node name="DebrisBonuses4" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.73499, 1.60826, 6.04378 )
+
+[node name="DebrisBonuses5" parent="." instance=ExtResource( 3 )]
+
+[node name="ChatBox" type="Control" parent="."]
+visible = false
+margin_left = 12.0
+margin_top = 757.0
+margin_right = 52.0
+margin_bottom = 797.0
+script = ExtResource( 2 )
+chat_log = NodePath("VBoxContainer/RichTextLabel")
+input_label = NodePath("VBoxContainer/HBoxContainer/Label")
+input_field = NodePath("VBoxContainer/HBoxContainer/LineEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChatBox"]
+margin_right = 430.0
+margin_bottom = 228.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ChatBox/VBoxContainer"]
+margin_right = 430.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChatBox/VBoxContainer"]
+margin_top = 204.0
+margin_right = 430.0
+margin_bottom = 228.0
+
+[node name="Label" type="Label" parent="ChatBox/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 47.0
+margin_bottom = 19.0
+text = "[Player]"
+
+[node name="LineEdit" type="LineEdit" parent="ChatBox/VBoxContainer/HBoxContainer"]
+margin_left = 51.0
+margin_right = 430.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameMenu" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 2
+script = ExtResource( 11 )
+chatbox_lineedit = NodePath("../ChatBox/VBoxContainer/HBoxContainer/LineEdit")
+
+[node name="ColorRect" type="ColorRect" parent="GameMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -350.0
+margin_right = 250.0
+margin_bottom = 350.0
+color = Color( 0, 0, 0, 0.45098 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -300.0
+margin_right = 200.0
+margin_bottom = 300.0
+custom_constants/separation = 24
+
+[node name="Label" type="Label" parent="GameMenu/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 110.0
+custom_fonts/font = ExtResource( 4 )
+text = "Settings"
+align = 1
+
+[node name="Options" type="Button" parent="GameMenu/VBoxContainer"]
+margin_top = 134.0
+margin_right = 400.0
+margin_bottom = 204.0
+custom_fonts/font = ExtResource( 10 )
+text = "Options"
+
+[node name="QuitGame" type="Button" parent="GameMenu/VBoxContainer"]
+margin_top = 228.0
+margin_right = 400.0
+margin_bottom = 298.0
+custom_fonts/font = ExtResource( 10 )
+text = "Quit Game"
+
+[connection signal="text_entered" from="ChatBox/VBoxContainer/HBoxContainer/LineEdit" to="ChatBox" method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="GameMenu/VBoxContainer/QuitGame" to="GameMenu" method="_on_QuitGame_pressed"]

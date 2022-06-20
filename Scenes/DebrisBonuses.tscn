@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Meshes/Barrel.glb" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/DebrisBonuses.gd" type="Script" id=2]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( 0.404385, 0.0242186, 0.919372, -0.110694, 0.75866, -1.1829, -0.110731, 1.23895, -1.1833, -1.10244, 0.76025, 0.477768, 0.841577, 2.04202, 0.512145, 0.740901, 0.0167871, -0.666857, -0.667345, 1.98107, 0.741443, -0.919375, 0.0242151, -0.404387, -0.772447, 1.97387, -0.62538, 0.732601, 1.89662, -0.732601, 1.17899, 0.648895, 0.0366991, -0.110732, 1.23895, 1.1833, -0.625018, 0.0243947, 0.771999, 0.810142, 1.01764, 0.88398, -1.09724, 1.27319, -0.475518, 0.80806, 0.760368, -0.881709, -0.404577, 0.0243156, -0.919283, 0.404679, 2.01103, 0.92004, 0.919375, 0.0242151, 0.404387, -0.994219, 1.97476, 0.0733724, 1.1419, 1.56978, -0.0366941, -0.808183, 0.760326, -0.881612, 0.25773, 1.97477, -0.957548, -0.47777, 0.760249, 1.10244, 0.728606, 2.09055, 0.191764, 0.477589, 0.76022, -1.10255, 1.10255, 0.760221, -0.477587, 1.09733, 1.27341, 0.475326, 0.0366832, 0.428193, 1.14156, -1.1416, 0.42817, 0.0364538, -0.441787, 1.53252, -1.06767, -1.09725, 1.2732, 0.47552, 0.0735552, 0.0235086, -0.993572, 0.477587, 0.760221, 1.10255, 0.919922, 1.97405, -0.404627, -0.441787, 1.53252, 1.06767, -0.919372, 0.0242186, 0.404385, -0.843792, 1.31065, 0.843562, 0.993606, 0.0234743, -0.0733271, 0.441705, 1.53242, -1.0677, -1.17942, 1.3488, 0.0364817, 0.842231, 0.431573, 0.768814, -1.10244, 0.760249, -0.47777, 0.843703, 1.31062, -0.843703, -0.843551, 0.687342, 0.843321, -0.073372, 1.97476, -0.994214, 0.441705, 1.53242, 1.0677, -0.073372, 1.97476, 0.994214, -0.843792, 1.31065, -0.843562, -0.477768, 0.76025, -1.10244, 0.805361, 1.60321, 0.805361, 1.10255, 0.76022, 0.477589, 1.06771, 1.53253, -0.441573, -0.257572, 0.0234541, 0.956961, -0.804709, 0.395547, -0.804709, 0.959925, 2.01408, 0.258139, 0.40502, 0.428012, -1.06828, -1.06864, 1.56976, -0.405153, -0.952858, 1.89677, 0.402955, 1.06825, 0.4279, -0.405095, 0.651948, 2.09055, 0.460185, -0.0366832, 0.428193, -1.14156, -0.40482, 1.97396, -0.919835, 1.1833, 1.23895, -0.110731 )
+
+[sub_resource type="SphereMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.2, 1, 0, 1 )
+
+[sub_resource type="SphereShape" id=6]
+radius = 1.89281
+
+[node name="DebrisBonuses" type="RigidBody"]
+collision_layer = 4
+collision_mask = 15
+mass = 0.07
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.547556, 0, 0, 0, 0.593086, 0, 0, 0, 0.547556, 0, -0.56245, 0 )
+shape = SubResource( 1 )
+
+[node name="Meshes" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.30896, 0, 0, 0, 0.30896, 0, 0, 0, 0.30896, 0, 0.0245084, 0 )
+
+[node name="Floaters" type="Spatial" parent="."]
+visible = false
+
+[node name="FloaterPoint1" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.0470509, 0, 0, 0, 0.0470509, 0, 0, 0, 0.0470509, 0, 0, 0.585492 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="FloaterPoint2" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.0470509, 0, 0, 0, 0.0470509, 0, 0, 0, 0.0470509, 0, 0, -0.585 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="FloaterPoint3" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.0470509, 0, 0, 0, 0.0470509, 0, 0, 0, 0.0470509, 0.585, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="FloaterPoint4" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.0470509, 0, 0, 0, 0.0470509, 0, 0, 0, 0.0470509, -0.585, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="FloaterPoint5" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.0470509, 0, 0, 0, 0.0470509, 0, 0, 0, 0.0470509, 0, -0.54036, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="FloaterPoint6" type="MeshInstance" parent="Floaters"]
+transform = Transform( 0.0470509, 0, 0, 0, 0.0470509, 0, 0, 0, 0.0470509, 0, 0.54, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 256
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 6 )
+
+[connection signal="body_entered" from="Area" to="." method="_on_debris_pick_up"]
