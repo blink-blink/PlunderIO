@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://CannonParticle.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=9]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 200 ), 0.0, 0.0, 0, 0, Vector2( 0.173913, -200 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.76087, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 10, 0 )
+initial_velocity = 5.0
+linear_accel_curve = SubResource( 10 )
+scale = 1.5
+scale_random = 1.0
+scale_curve = SubResource( 12 )
+
+[sub_resource type="SpatialMaterial" id=7]
+params_diffuse_mode = 4
+params_specular_mode = 3
+metallic = 0.17
+metallic_specular = 0.47
+roughness = 0.34
+
+[sub_resource type="SphereMesh" id=8]
+material = SubResource( 7 )
+radius = 0.5
+height = 1.0
+radial_segments = 30
+rings = 15
+
+[node name="CannonParticle" type="Particles"]
+lifetime = 1.5
+one_shot = true
+preprocess = 0.13
+explosiveness = 1.0
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 13 )
+draw_pass_1 = SubResource( 8 )
+script = ExtResource( 1 )
