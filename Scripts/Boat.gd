@@ -57,7 +57,7 @@ func _physics_process(delta):
 	else:
 		#buoyant force 
 		if global_transform.origin.y < -10:
-			emit_signal("damaged")
+			emit_signal("on_queue_free")
 			queue_free()
 			return
 		if global_transform.origin.y < wh:

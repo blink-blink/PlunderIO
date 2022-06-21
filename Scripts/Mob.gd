@@ -65,6 +65,14 @@ puppet func update_hp(p_hp):
 	Boat.HIT_POINTS = p_hp
 	_on_Boat_Update()
 
+remotesync func sync_network_master(id):
+	print("master changed to: " + str(id))
+	set_network_master(id)
+	if is_network_master():
+		Boat.set_puppet(false)
+	else:
+		Boat.set_puppet(true)
+
 func _on_Boat_Update():
 	if not is_instance_valid(Boat):
 		return

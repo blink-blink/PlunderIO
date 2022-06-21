@@ -148,9 +148,12 @@ func Network_tick(delta):
 	
 	if network_tick <= 0:
 		network_tick = NETWORK_TICK_RATE
-		rpc_unreliable("update_boat", Boat.global_transform, Boat.angular_velocity, Boat.linear_velocity)
+		rpc_update_boat()
 	else:
 		network_tick -= delta
+
+func rpc_update_boat():
+	rpc_unreliable("update_boat", Boat.global_transform, Boat.angular_velocity, Boat.linear_velocity)
 
 #rpc	
 puppet func update_boat(p_transform, p_angular_vel, p_linear_vel):

@@ -11,7 +11,7 @@ func _tick(_agent: Node, _blackboard: Blackboard) -> bool:
 func move_to_target(agent: Node, blackboard: Blackboard) -> bool:
 	var boat: Boat = agent.get_node("Boat")
 	
-	if not is_instance_valid(boat):
+	if not is_instance_valid(boat) or not blackboard.has_data("target"):
 		return fail()
 		
 	var target = blackboard.get_data("target")

@@ -94,6 +94,7 @@ void fragment(){
 	METALLIC = 0.6;
 	SPECULAR = 0.2;
 	ROUGHNESS = 0.3;
+	SSS_STRENGTH = 1f;
 	
 	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
 	depth = depth * 2.0 - 1.0;

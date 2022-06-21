@@ -7,6 +7,7 @@ var server = null
 var client = null
 
 var ip_address = ""
+var is_joining_server = false
 
 func _ready():
 	if OS.get_name() == "Windows":
@@ -32,6 +33,7 @@ func create_server():
 	Global.add_player(get_tree().get_network_unique_id())
 
 func join_server():
+	is_joining_server = false
 	client = NetworkedMultiplayerENet.new()
 	client.create_client(ip_address, DEFAULT_PORT)
 	get_tree().set_network_peer(client)

@@ -6,24 +6,21 @@ onready var player_spawn = $SpawnLocations/PlayerSpawn
 onready var mob_spawn_location = $SpawnLocations/Mob/MobSpawnLocation
 onready var mobs = $Mobs
 
-var INIT_MOB_NUM = 30
+var INIT_MOB_NUM = 3
 
 func _physics_process(delta):
 	pass
 
 func _ready():
 	#network signals
+	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 	
+	if Network.is_joining_server:
+		Network.join_server()
+	
 	randomize()
-	for player in Global.Players:
-		var player_instance = create_player(player)
-		
-		#if multiplayer
-		if not get_tree().has_network_peer():
-			continue
-		if player == get_tree().get_network_unique_id():
-			rpc("player_loaded",player, player_instance.global_transform)
+	create_player(get_tree().get_network_unique_id())
 	
 #	#create mobs for single player only for now
 	if get_tree().has_network_peer():
@@ -50,7 +47,7 @@ remote func player_loaded(id, transform):
 						mob.Boat.angular_velocity,
 						mob.Boat.HIT_POINTS)
 
-remote func create_mob(m_name, type, origin, b_transform, linear_vel, angular_vel, hp):
+remote func create_mob(m_name, type, origin, b_transform, linear_vel, angular_vel, hp, n_master):
 	var mob = GameData.mob_scene[type].instance()
 	mob.name = m_name
 	mobs.add_child(mob)
@@ -59,8 +56,29 @@ remote func create_mob(m_name, type, origin, b_transform, linear_vel, angular_ve
 	mob.Boat.linear_velocity = linear_vel
 	mob.Boat.angular_velocity = linear_vel
 	mob.Boat.HIT_POINTS = hp
+	mob.set_network_master = n_master
 	mob._on_Boat_Update()
-	print("mob ("+mob.name+") type: " + type + " created")
+	print("mob ("+mob.name+") type: " + type + " created, master: "+str(mob.get_network_master()))
+
+func _player_connected(id):
+	print("player ", id, " has connected")
+	create_player(id)
+	
+	var player_boat = get_node(str(get_tree().get_network_unique_id()))
+	player_boat.rpc_update_boat()
+	player_boat._on_Boat_Update()
+	
+	for mob in mobs.get_children():
+		if not is_instance_valid(mob.Boat):
+			continue
+		if mob.get_network_master() != get_tree().get_network_unique_id():
+			continue
+		print("create_mob ("+mob.name+") requested")
+		rpc_id(id, "create_mob", mob.name, mob.TYPE, mob.global_transform.origin,
+						mob.Boat.global_transform,
+						mob.Boat.linear_velocity,
+						mob.Boat.angular_velocity,
+						mob.Boat.HIT_POINTS, mob.get_network_master())
 
 func _player_disconnected(id):
 	if has_node(str(id)):

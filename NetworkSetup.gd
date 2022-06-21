@@ -22,5 +22,5 @@ func _on_JoinServer_pressed():
 	if server_ip_address.text != "":
 		mutliplayer_config_ui.hide()
 		Network.ip_address = server_ip_address.text
-		Network.join_server()
+		Network.is_joining_server = true
 		SceneLoader.load_scene(world_scene_path, self)

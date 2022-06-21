@@ -14,12 +14,18 @@ func pick_target(agent: Node, blackboard: Blackboard):
 	var last_target: Boat = blackboard.get_data("target")
 	var closest_distance = -1
 	
+	if last_target:
+		if is_instance_valid(last_target):
+			closest_distance = distance_to_target(boat, last_target)
+		else:
+			if get_tree().has_network_peer() and get_tree().get_network_unique_id() == 1:
+				agent.rpc("sync_network_master", 1)
+			last_target = null
+			blackboard.set_data("target", null)
+	
 	if candidate_targets.size() <= 0:
 		detection_marker.hide()
 		return fail()
-	
-	if blackboard.has_data("target"):
-		closest_distance = distance_to_target(boat, blackboard.get_data("target"))
 	
 	for candidate_target in candidate_targets:
 		if blackboard.has_data("target") and distance_to_target(boat, candidate_target) > closest_distance:
@@ -33,13 +39,10 @@ func pick_target(agent: Node, blackboard: Blackboard):
 		return fail()
 	
 	#change master on new target if multiplayer
+	var new_master_id = int(blackboard.get_data("target").get_parent().name)
 	if last_target != blackboard.get_data("target") and get_tree().has_network_peer():
-		print("master changed")
-		agent.set_network_master(int(last_target.get_parent().name))
-		if agent.is_network_master():
-			boat.set_puppet(false)
-		else:
-			boat.set_puppet(true)
+		if new_master_id == get_tree().get_network_unique_id():
+			agent.rpc("sync_network_master", new_master_id)
 	
 	detection_marker.show()
 	return succeed()

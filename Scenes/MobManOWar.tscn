@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/MobManOWar.gd" type="Script" id=1]
 [ext_resource path="res://barHorizontal_green_mid 200.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scripts/Move.gd" type="Script" id=6]
 [ext_resource path="res://addons/behavior_tree/src/behavior_tree.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/pickTarget.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/isNotNearIsland.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/moveShootingAngle.gd" type="Script" id=10]
 [ext_resource path="res://addons/behavior_tree/src/btnodes/leaves/bt_wait.gd" type="Script" id=11]
 [ext_resource path="res://addons/behavior_tree/src/btnodes/composites/bt_selector.gd" type="Script" id=12]
@@ -80,10 +79,6 @@ script = ExtResource( 10 )
 
 [node name="PatrolSelector" type="Node" parent="BehaviorTree/BTSelector"]
 script = ExtResource( 5 )
-
-[node name="isNotNearIsland" type="Node" parent="BehaviorTree/BTSelector/PatrolSelector"]
-script = ExtResource( 9 )
-boat = NodePath("../../../../Boat")
 
 [node name="Move5Sec" type="Node" parent="BehaviorTree/BTSelector/PatrolSelector"]
 script = ExtResource( 6 )
