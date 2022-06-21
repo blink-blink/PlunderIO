@@ -1,6 +1,8 @@
 extends Spatial
 
 export (PackedScene) var cannon_missile_scene
+onready var cannon_muzzle = $CannonHead/Muzzle
+var cannon_particle = preload("res://Scenes/CannonParticle.tscn")
 
 var is_aiming = false
 #onready var line_trajectory = $Muzzle/LineTrajectory
@@ -46,7 +48,8 @@ func fire():
 
 func _on_FireDelay_timeout():
 	var cannon_head = $CannonHead
-	$CannonHead/Muzzle/Particles.restart()
+	$CannonHead/Muzzle/CannonParticle.restart()
+#	cannon_muzzle.add_child(cannon_particle.instance())
 	var cannon_missile = cannon_missile_scene.instance()
 	cannon_missile.initialize($CannonHead/Muzzle.global_transform.origin, cannon_head.global_transform.basis.y.normalized())
 	get_node("/root/World").add_child(cannon_missile)
