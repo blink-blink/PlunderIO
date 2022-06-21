@@ -6,7 +6,7 @@ onready var player_spawn = $SpawnLocations/PlayerSpawn
 onready var mob_spawn_location = $SpawnLocations/Mob/MobSpawnLocation
 onready var mobs = $Mobs
 
-var INIT_MOB_NUM = 15
+var INIT_MOB_NUM = 30
 
 func _physics_process(delta):
 	pass

@@ -7,7 +7,7 @@
 [ext_resource path="res://addons/behavior_tree/src/btnodes/composites/bt_sequence.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/Move.gd" type="Script" id=6]
 [ext_resource path="res://addons/behavior_tree/src/behavior_tree.gd" type="Script" id=7]
-[ext_resource path="res://Scripts/isPlayerClose.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/pickTarget.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/isNotNearIsland.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/moveShootingAngle.gd" type="Script" id=10]
 [ext_resource path="res://addons/behavior_tree/src/btnodes/leaves/bt_wait.gd" type="Script" id=11]
@@ -20,7 +20,6 @@ radius = 100.0
 [node name="MobManOWar" type="Spatial"]
 script = ExtResource( 1 )
 boat_tween = NodePath("BoatTween")
-type = "ManOWar"
 
 [node name="Boat" parent="." instance=ExtResource( 3 )]
 
@@ -73,13 +72,11 @@ script = ExtResource( 12 )
 [node name="AttackSelector" type="Node" parent="BehaviorTree/BTSelector"]
 script = ExtResource( 5 )
 
-[node name="isPlayerClose" type="Node" parent="BehaviorTree/BTSelector/AttackSelector"]
+[node name="pickTarget" type="Node" parent="BehaviorTree/BTSelector/AttackSelector"]
 script = ExtResource( 8 )
 
 [node name="moveShoot" type="Node" parent="BehaviorTree/BTSelector/AttackSelector"]
 script = ExtResource( 10 )
-boat = NodePath("../../../../Boat")
-mob = NodePath("../../../..")
 
 [node name="PatrolSelector" type="Node" parent="BehaviorTree/BTSelector"]
 script = ExtResource( 5 )
@@ -101,9 +98,5 @@ wait_time = 5.0
 
 [connection signal="damaged" from="Boat" to="." method="_on_Boat_Update"]
 [connection signal="on_queue_free" from="Boat" to="." method="_on_Boat_on_queue_free"]
-[connection signal="body_entered" from="Boat/AreaDetection" to="BehaviorTree/BTSelector/AttackSelector/isPlayerClose" method="_on_AreaDetection_body_entered"]
-[connection signal="body_entered" from="Boat/AreaDetection" to="BehaviorTree/BTSelector/AttackSelector/moveShoot" method="_on_AreaDetection_body_entered"]
-[connection signal="body_entered" from="Boat/AreaDetection" to="BehaviorTree/BTSelector/PatrolSelector/isNotNearIsland" method="_on_AreaDetection_body_entered"]
-[connection signal="body_exited" from="Boat/AreaDetection" to="BehaviorTree/BTSelector/AttackSelector/isPlayerClose" method="_on_AreaDetection_body_exited"]
-[connection signal="body_exited" from="Boat/AreaDetection" to="BehaviorTree/BTSelector/AttackSelector/moveShoot" method="_on_AreaDetection_body_exited"]
-[connection signal="body_exited" from="Boat/AreaDetection" to="BehaviorTree/BTSelector/PatrolSelector/isNotNearIsland" method="_on_AreaDetection_body_exited"]
+[connection signal="body_entered" from="Boat/AreaDetection" to="BehaviorTree/BTSelector/AttackSelector/pickTarget" method="_on_AreaDetection_body_entered"]
+[connection signal="body_exited" from="Boat/AreaDetection" to="BehaviorTree/BTSelector/AttackSelector/pickTarget" method="_on_AreaDetection_body_exited"]
